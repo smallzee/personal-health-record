@@ -1,0 +1,665 @@
+<?php
+
+//<img src="http://upliftingsa.co.za/eagle.gif">
+//exit();
+	define( 'TIMEBEFORE_NOW','now' );
+    define( 'TIMEBEFORE_MINUTE','{num} minute ago' );
+    define( 'TIMEBEFORE_MINUTES','{num} minutes ago' );
+    define( 'TIMEBEFORE_HOUR', '{num} hour ago' );
+    define( 'TIMEBEFORE_HOURS', '{num} hours ago' );
+    define( 'TIMEBEFORE_YESTERDAY', 'yesterday' );
+    define( 'TIMEBEFORE_FORMAT',  '%e %b' );
+    define( 'TIMEBEFORE_FORMAT_YEAR', '%e %b, %Y' );
+
+    define( 'TIMEBEFORE_DAYS',    '{num} days ago' );
+	define( 'TIMEBEFORE_WEEK',    '{num} week ago' );
+	define( 'TIMEBEFORE_WEEKS',   '{num} weeks ago' );
+	define( 'TIMEBEFORE_MONTH',   '{num} month ago' );
+	define( 'TIMEBEFORE_MONTHS',  '{num} months ago' );
+
+	date_default_timezone_set("Africa/Harare");
+
+	function login()
+	{
+		if(!isset($_SESSION['user'])){
+			return false;
+		}else{
+			return true;
+		}
+	}
+
+	function admin()
+	{
+		if(!isset($_SESSION['admin'])){
+			return false;
+		}else{
+			return true;
+		}
+	}
+
+	function set_flash($msg,$type)
+	{
+		$_SESSION['flash'] = "<div class='alert alert-".$type."'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>".$msg."</div>";
+	}
+
+	function flash()
+	{
+		if(isset($_SESSION['flash']))
+		{
+			echo $_SESSION['flash'];
+			unset($_SESSION['flash']);
+		}
+	}
+
+	function login_check()
+	{
+		global $db;
+		$now = time();
+		$duration = "300";
+		$session = session_id();
+		$time_check = $now - $duration;
+		$user_id = $_SESSION['user'];
+
+
+		$sql = "SELECT * FROM online_users WHERE session_id = '$session'";
+		$result = $db->query($sql);
+
+		$count = $result->rowCount();
+
+		if($count == "0"){
+
+			$sql1 = "INSERT INTO online_users(session_id, last_seen, user_id)VALUES('$session','$now','$user_id')";
+			$result1 = $db->query($sql1);
+		}
+		else {
+			$sql2 = "UPDATE online_users SET last_seen = '$now' WHERE session_id = '$session'";
+			$result2 = $db->query($sql2);
+		}
+		
+
+		// if over 5 minute, delete session
+        //$next
+        $next = $now - (300);
+		$sql4 = "DELETE FROM online_users WHERE last_seen < $next";
+		$result4 = $db->query($sql4);
+
+		$result->closeCursor();
+		//$result2->closeCursor();
+		$result4->closeCursor();
+
+
+	}
+
+	function m_status($status)
+	{
+		if($status == 1){
+			return "Active";
+		}elseif ($status == 2) {
+			return "Suspended";
+		}elseif ($status == 0) {
+			return "Banned / Pending";
+		}
+	}
+
+	function acc_status($status)
+	{
+		if($status == 1){
+			return "Active";
+		}elseif ($status == 2) {
+			return "Deleted";
+		}elseif ($status == 0) {
+			return "Pending";
+		}
+	}
+
+	function ticket_status($status)
+	{
+		if($status == 0){
+			return "Active";
+		}elseif ($status == 1) {
+			return "Close";
+		}
+	}
+
+	function wallet_status($status)
+	{
+		if($status == 0){
+			return "Unconfirmed";
+		}elseif ($status == 1) {
+			return "Confirmed";
+		}elseif ($status == 2){
+		    return "Cleared";
+        }
+	}
+
+	function admin_role($n)
+	{
+		if($n == 0){
+			return "Moderator";
+		}elseif ($n == 1) {
+			return "Global Admin";
+		}
+	}
+
+
+	function time_ago($time)
+    {
+        $out    = ''; // what we will print out
+        $now    = time(); // current time
+        $diff   = $now - $time; // difference between the current and the provided dates
+
+        if( $diff < 60 ) // it happened now
+            return TIMEBEFORE_NOW;
+
+        elseif( $diff < 3600 ) // it happened X minutes ago
+            return str_replace( '{num}', ( $out = round( $diff / 60 ) ), $out == 1 ? TIMEBEFORE_MINUTE : TIMEBEFORE_MINUTES );
+
+        elseif( $diff < 3600 * 24 ) // it happened X hours ago
+            return str_replace( '{num}', ( $out = round( $diff / 3600 ) ), $out == 1 ? TIMEBEFORE_HOUR : TIMEBEFORE_HOURS );
+
+        elseif( $diff < 3600 * 24 * 2 ) // it happened yesterday
+            return TIMEBEFORE_YESTERDAY;
+
+        elseif( $diff < 3600 * 24 * 7 )
+        return str_replace( '{num}', round( $diff / ( 3600 * 24 ) ), TIMEBEFORE_DAYS );
+
+	    elseif( $diff < 3600 * 24 * 7 * 4 )
+	        return str_replace( '{num}', ( $out = round( $diff / ( 3600 * 24 * 7 ) ) ), $out == 1 ? TIMEBEFORE_WEEK : TIMEBEFORE_WEEKS );
+
+	    elseif( $diff < 3600 * 24 * 7 * 4 * 12 )
+	        return str_replace( '{num}', ( $out = round( $diff / ( 3600 * 24 * 7 * 4 ) ) ), $out == 1 ? TIMEBEFORE_MONTH : TIMEBEFORE_MONTHS );
+
+
+        else // falling back on a usual date format as it happened later than yesterday
+            return strftime( date( 'Y', $time ) == date( 'Y' ) ? TIMEBEFORE_FORMAT : TIMEBEFORE_FORMAT_YEAR, $time );
+    }
+
+    function settings($name)
+    {
+    	global $db;
+    	$set = $db->prepare('SELECT value FROM settings WHERE name = :name');
+    	$set->execute(array('name' => $name));
+    	$rs = $set->fetch(PDO::FETCH_ASSOC);
+    	return $rs['value'];
+    	$set->closeCursor();
+    }
+
+    function u_name($id)
+    {
+    	global $db;
+    	$set = $db->prepare('SELECT name FROM users WHERE id = :id');
+    	$set->execute(array('id' => $id));
+    	$rs = $set->fetch(PDO::FETCH_ASSOC);
+    	return $rs['name'];
+    	$set->closeCursor();
+    }
+
+    function u_mail($id)
+    {
+    	global $db;
+    	$set = $db->prepare('SELECT email FROM users WHERE id = :id');
+    	$set->execute(array('id' => $id));
+    	$rs = $set->fetch(PDO::FETCH_ASSOC);
+    	return $rs['email'];
+    	$set->closeCursor();
+    }
+
+    function u_phone($id)
+    {
+    	global $db;
+    	$set = $db->prepare('SELECT phone FROM users WHERE id = :id');
+    	$set->execute(array('id' => $id));
+    	$rs = $set->fetch(PDO::FETCH_ASSOC);
+    	return $rs['phone'];
+    	$set->closeCursor();
+    }
+
+    function order_status($n)
+    {
+    	if($n == 0){
+    		return "Not paid";
+    	}elseif ($n == 1) {
+    		return "Paid, Not Confirmed";
+    	}elseif ($n == 2) {
+    		return "Completed";
+    	}
+    }
+
+
+
+    function my_curl($data)
+	{
+		$post_str = "";
+
+		foreach ($data as $key => $value) {
+			$post_str .= $key."=".urlencode($value)."&";
+		}
+
+		$post_str = substr($post_str, 0, -1);
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, 'http://cheapglobalsms.com/api_v1');
+		curl_setopt($ch, CURLOPT_POST, TRUE);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $post_str);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+
+		$response = curl_exec($ch);
+
+		curl_close($ch);
+	}
+
+
+	function send_ph_message($name1,$name2,$sum1,$phone1,$acc_name,$acc_no,$acc_type,$bank_name,$exp_time,$phone2)
+	{
+	$subject = "CASH MASTERS ALLOCATION";
+      $message = "<html><body><div style='font-family:calibri; max-width:800px; padding:30px 20px;'>";
+     
+      $message .= "<br>";
+      $message .= "Dear $name1, You have been allocated to pay the sum of $sum1 to $name2.<br>";
+      $message .= "<br>";
+      $message .= "The recipient's details are asstated below.<br>";
+      $message .= "<br>";
+      $message .= "Name = ".$name2;
+      $message .= "<br>Phone = ".$phone1;
+      $message .= "<br>Account Holder = ".$acc_name;
+      $message .= "<br>Account No = ".$acc_no;
+      $message .= "<br>Bank Name = ".$bank_name;
+            $message .= "<br>";
+     
+            $message .= "<br>";   
+      $message .= "</div></body></html>";
+      $headers = "From: info@cashmasters.co\r\n";
+      $headers .= "MIME-Version: 1.0\r\n";
+      $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+      @mail($email, $subject, $message, $headers); //MAIL
+
+      //SMS
+      
+
+
+
+	}
+
+	//function to merge
+	
+	function auto_merge($gh_id,$user_id)
+	{
+		global $db;
+		//GET GH DETAILS
+		
+		$gh = $db->prepare("SELECT * FROM gh WHERE status = :status and id = :id");
+		$gh->execute(array(
+			'status' => 0,
+			'id' => $gh_id
+			));
+		$gh_rs = $gh->fetch(PDO::FETCH_ASSOC);
+		$gh->closeCursor();
+		$gh_amount = $gh_rs['amount'];
+		$gh_type = $gh_rs['gh_type'];
+
+		if($gh_type == 0){
+			$m_type = 0;
+			$m_type2 = 1;
+		}elseif ($gh_type == 1) {
+			$m_type = 0;
+			$m_type2 = 2;
+		}elseif ($gh_type == 2) {
+			$m_type = 1;
+			$m_type2 = 2;
+		}
+
+		// var_dump($gh_rs);
+		// exit();
+
+		//Check for last ph
+		
+		/*$sql = $db->prepare("SELECT ph_id as id,user_id, amount,date_added,ph_type, 'ph_extra' as source FROM ph_extra WHERE status = :status2 and user_id != :user_id and (ph_type = :gh_type or ph_type = :m_type or ph_type = :m_type2) AND :now > merge_date UNION SELECT id,user_id,amount,date_added,ph_type, 'ph' as source FROM ph WHERE status = :status and user_id != :user_id  and (ph_type = :gh_type or ph_type = :m_type or ph_type = :m_type2) GROUP BY id ASC");
+		$sql->execute(array(
+			'status' => 0,
+			'status2' => 0,
+			'gh_type' => $gh_type,
+			'm_type' => $m_type,
+			'm_type2' => $m_type2,
+			'user_id' => $user_id
+			));
+
+		*/
+	
+		$sql = $db->prepare("SELECT ph_id as id,user_id, amount,date_added,ph_type, 'ph_extra' as source FROM ph_extra WHERE status = :status2 and user_id != :user_id and (ph_type = :gh_type or ph_type = :m_type or ph_type = :m_type2) AND country = :country UNION SELECT id,user_id,amount,date_added,ph_type, 'ph' as source FROM ph WHERE status = :status and user_id != :user_id  and (ph_type = :gh_type or ph_type = :m_type or ph_type = :m_type2) AND :now > merge_date AND country =:country GROUP BY id ASC");
+		$sql->execute(array(
+			'status' => 0,
+			'status2' => 0,
+			'gh_type' => $gh_type,
+			'm_type' => $m_type,
+			'm_type2' => $m_type2,
+			'user_id' => $user_id,
+			'now' => time(),
+			'country' => $gh_rs['country']
+			));
+		$gh_rem = $gh_amount;
+		$c_amount = 0;
+		$excess = 0;
+		while($rs = $sql->fetch(PDO::FETCH_ASSOC))
+		{	
+			// var_dump($rs);
+			// exit();
+			if($c_amount == $gh_amount){
+				//break loop
+				//var_dump($excess);
+				break;
+			}
+
+			$extra_amount = $rs['amount'];				
+			if($extra_amount >= $gh_rem){
+				$amount = $gh_rem;
+				$excess = $extra_amount - $amount;
+			}else{
+				$excess = 0;
+				$amount = $extra_amount;
+			}
+
+				$source = $rs['source'];
+				$p_id = $rs['id'];
+		      	$update = $db->query("UPDATE $source SET status = 1 WHERE ph_id = '$p_id'");
+		      	/*var_dump($update->rowCount());
+		      	var_dump($source);
+		      	var_dump($p_id);*/
+			
+			if($excess > 0){
+				//save into ph_extra
+				
+				$save_extra = $db->prepare("INSERT INTO ph_extra(user_id,amount,date_added,status,ph_id,ph_type) VALUES(:user_id,:amount,:date_added,:status,:ph_id,:ph_type)");
+				$save_extra->execute(array(
+					'user_id' => $rs['user_id'],
+					'amount' => $excess,
+					'date_added' => time(),
+					'status' => 0,
+					'ph_id' => $rs['id'],
+					'ph_type' => $rs['ph_type']
+					));
+				$save_extra->closeCursor();
+			}
+
+			$c_amount += $amount;
+			$object = array();
+			$object['gh_id'] = $gh_id;
+			$object['ph_id'] = $rs['id'];
+			$object['user1'] = $user_id;
+			$object['user2'] = $rs['user_id'];
+			$object['amount'] = $amount;
+			$object['t_type'] = $gh_type."_".$rs['ph_type'];
+			$object['date_added'] = time();
+			$object['status'] = 0;
+			$date_exp = date("l");
+			switch ($date_exp) {
+			    case 'Friday':
+			    case 'Saturday':
+			    case 'Sunday':
+			    $object['expired'] = time() + (60*60*settings('expire'));
+			    $exp_time = settings('expire');
+			    # code...
+			    break;
+
+			    default:
+			    $object['expired'] = time() + (60*60*settings('expire'));
+			    $exp_time = settings('expire');
+			    # code...
+			    break;
+			}
+
+
+			$insert = $db->prepare('INSERT INTO orders(gh_id,ph_id,user1,user2,amount,date_added,status,expired,t_type) VALUES(:gh_id,:ph_id,:user1,:user2,:amount,:date_added,:status,:expired,:t_type)');
+
+			$insert->execute($object);      
+			$order_no = $db->lastInsertId();
+
+			$order_id = "C".rand(0,9)."".rand(0,9)."".rand(0,9)."".rand(0,9)."".rand(0,9)."".rand(0,9)."".$order_no;
+
+			$insert->closeCursor();
+
+			$insert2 = $db->prepare('UPDATE orders SET order_id = :order_id WHERE id = :id');
+			$insert2->execute(array(
+				'order_id' => $order_id,
+				'id' => $order_no
+				));
+			$insert2->closeCursor();
+
+
+			$name1 = u_name($rs['user_id']); //ph
+			$name2 = u_name($gh_rs['user_id']); //gh
+			$phone1 = u_phone($gh_rs['user_id']); //gh
+
+			$phone2 = u_phone($rs['user_id']); //ph
+
+			$email = u_mail($rs['user_id']); //ph
+			$email1 = u_mail($gh_rs['user_id']); //gh
+			$sum1 = $amount;
+
+			//GET ACCOUNT
+	        $sql_1 = $db->prepare('SELECT * FROM users WHERE id = :id');
+	        $sql_1->execute(array('id' => $gh_rs['account_id']));
+	        $sql_12 = $sql_1->fetch(PDO::FETCH_ASSOC);
+	        $sql_1->closeCursor();
+
+	        $acc_name = $sql_12['account_name'];
+	        $acc_no = $sql_12['account_no'];
+	        $bank_name = $sql_12['bank_name'];
+	        $acc_type = "";
+
+
+	        send_ph_message($name1,$name2,$sum1,$phone1,$acc_name,$acc_no,$acc_type,$bank_name,$exp_time,$phone2);
+
+
+	        /*$update = $db->prepare('UPDATE ph SET status = :status WHERE ph_id = :id');
+		    $update->execute(
+		          array(
+		            'status' => 1,
+		            'id' => $rs['id']
+		            )
+		        );
+		      $update->closeCursor();
+
+		    $update_ex = $db->prepare('UPDATE ph_extra SET status = :status WHERE ph_id = :id');
+		    $update_ex->execute(
+		          array(
+		            'status' => 1,
+		            'id' => $rs['id']
+		            )
+		        );
+		      $update_ex->closeCursor();*/		      
+
+		      /*$update = $db->prepare('UPDATE '.$source.' SET status = :status WHERE ph_id = :id');
+			  $update->execute(
+			          array(
+			            'status' => 1,
+			            'id' => $rs['id']
+			            )
+			        );
+		      $update->closeCursor();*/		      
+
+
+
+			//var_dump("Amount = ".$amount);			
+
+			$gh_rem = $gh_amount - $c_amount;
+
+			//var_dump("GH Rem = ".$gh_rem);
+
+			//var_dump($rs);
+		}
+
+		//update gh
+		
+		$gh_update = $db->prepare("UPDATE gh set status = :status WHERE id = :id");
+		$gh_update->execute(array(
+			'status' => 1,
+			'id' => $gh_id
+			));
+		$gh_update->closeCursor();
+
+        //check if gh_amount is less than cummulative
+
+        //var_dump($gh_amount." ". $c_amount);
+        //exit;
+
+        if($gh_amount > $c_amount){
+            //give user fund
+            $balance = $gh_amount - $c_amount;
+            $in_wallet = $db->prepare('INSERT INTO wallet(wallet_id,user_id,wallet_type,date_added,amount1,amount2,amount3,released_date,status,status2) VALUES(:wallet_id,:user_id,:wallet_type,:date_added,:amount1,:amount2,:amount3,:released_date,:status,:status2)');
+
+              $wallet_type = "MONEY BACK";
+              $w_id = "R".rand(0,9)."".rand(0,9)."".rand(0,9)."".rand(0,9)."".rand(0,9)."".$gh_id;
+
+              //$amt_rem = $rs['amount'];
+              $released_date = time();
+              $in_wallet->execute(array(
+                  'wallet_id' => $w_id,
+                  'user_id' => $user_id,
+                  'wallet_type' => $wallet_type,
+                  'date_added' => time(),
+                  'amount1' => $balance,
+                  'amount2' => $balance,
+                  'amount3' => $balance,
+                  'released_date' => $released_date,
+                  'status' => 1,
+                  'status2' => 2
+              ));
+              $in_wallet->closeCursor();
+        }
+
+		$gh->closeCursor();
+		$sql->closeCursor();
+	}
+
+	function site_url()
+    {
+        $base = $_SERVER['REQUEST_SCHEME']."://".$_SERVER['HTTP_HOST']."/wealth_society";        
+        return $base;
+    }
+
+    function t_type($n){
+    	if($n == 0){
+    		return "Local Currency";
+    	}elseif ($n == 1) {
+    		return "Local & BTC";
+    	}elseif ($n == 2) {
+    		return "BTC";
+    	}
+    }
+
+    function amount_format($amt){
+    	$usd = settings("e_rates") * $amt;
+    	//@$btc = file_get_contents("https://blockchain.info/tobtc?currency=USD&value=".$usd);
+    	$url = "https://blockchain.info/tobtc?currency=USD&value=".$usd;
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $btc = curl_exec($ch);
+        curl_close($ch);
+
+		//$btc = curl_exec($ch);
+
+		//curl_close($ch);
+		//var_dump($ch);
+		//exit();
+    	return " US $ ".number_format($amt)." ($".$usd.") (".$btc." BTC)";
+    }
+
+    function alert($msg,$type,$close = false)
+    {
+        if($close == false){
+            $msg = "<div class='alert alert-".$type."'>".$msg."</div>";
+        }else{
+            $msg = "<div class='alert alert-".$type."'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>".$msg."</div>";
+        }
+
+        echo $msg;
+    }
+
+    function dollar_amt($amt){
+    	$usd = settings("e_rates") * $amt;
+    	return number_format($usd);
+    }
+
+    function btc_amt($amt){
+    	$usd = settings("e_rates") * $amt;
+    	$btc = file_get_contents("https://blockchain.info/tobtc?currency=USD&value=".$usd);
+    	return $btc;
+    }
+
+
+    function user_details($id,$field)
+    {
+    	global $db;
+    	$set = $db->prepare('SELECT * FROM users WHERE id = :id');
+    	$set->execute(array('id' => $id));
+    	$rs = $set->fetch(PDO::FETCH_ASSOC);
+    	return $rs[$field];
+    	$set->closeCursor();
+    }
+
+function log_user($field)
+{
+    global $db;
+    $id = $_SESSION['user'];
+    $set = $db->prepare('SELECT * FROM users WHERE id = :id');
+    $set->execute(array('id' => $id));
+    $rs = $set->fetch(PDO::FETCH_ASSOC);
+    $set->closeCursor();
+    return $rs[$field];
+
+}
+
+    function order_type($t){
+    	$ts = explode("_", $t);
+    	return "GH => ".t_type($ts[0]).", PH => ".t_type($ts[1]);
+    }
+
+    function new_notification($user,$title,$url){
+        global $db;
+
+        $sql = $db->prepare("INSERT INTO notifications(user_id,title,url,date_added) VALUES (:user_id,:title,:url,:date_added)");
+        $sql->execute(array(
+            'user_id' => $user,
+            'title' => $title,
+            'url' => $url,
+            'date_added' => time()
+        ));
+    }
+
+    function msg_status($s){
+        if($s == 0){
+            return "unread";
+        }else{
+            return "read";
+        }
+    }
+
+
+    function send_email($subject,$to,$message,$cc = FALSE)
+	{
+    $email_tmp = file_get_contents("../email.html");
+    $message2 = str_replace("{{TITLE}}", $subject, $email_tmp);
+
+    $message = str_replace("{{TEXT}}", $message, $message2);
+
+    //str_replace(search, replace, subject)
+
+    $full_name = "Quantum";
+    $email_from = "support@quantumdonorsandprojects.us";
+
+    $from = "$full_name <$email_from>";
+    $headers = 'From:'.$full_name.'<'.$email_from.'>'."\r\n";
+    if($cc != FALSE)
+    {
+        $headers .= 'BCC: '. implode(",", $cc) . "\r\n";
+    }
+    $headers .= "MIME-Version: 1.0\r\n";
+    $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+    //$headers .= "Return-Path: no-reply@quantumdonorsandprojects.us";
+
+        @mail($to, $subject, $message, $headers);
+	}
+
+?>
