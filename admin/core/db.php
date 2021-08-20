@@ -11,9 +11,6 @@ if(env == "local") {
     define('DB_USER', 'root');
     define('DB_PASSWORD', '');
 
-
-    define("site_url","http://project.apps/library/");
-
     //error_reporting("E_ALL");
 }else{
     define('DB_HOST', 'localhost');
@@ -21,7 +18,6 @@ if(env == "local") {
     define('DB_USER', 'onlinem1_yearapp');
     define('DB_PASSWORD', 'qvXT%vCU2+QG');
 
-    define("site_url","http://uwansell.com.ng/");
     error_reporting("E_FATAL");
 
 }

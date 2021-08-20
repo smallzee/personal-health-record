@@ -6,9 +6,9 @@
     <!-- Logo -->
     <a href="index.php" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>Lau</b>Lech</span>
+      <span class="logo-mini"><b>Pers</b>on</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Lautech</b> Portal</span>
+      <span class="logo-lg"><b>Personal</b> Health</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -67,91 +67,71 @@
       </div>      
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">        
-        <li class="treeview">
+        <li>
           <a href="index.php">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span> 
+            <i class="fa fa-dashboard "></i> <span>Dashboard</span>
           </a>          
         </li>
 
+          <li class="header">PATIENTS</li>
 
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-folder text-green"></i>
-            <span>Patient</span>
-            <i class="fa fa-angle-left pull-right"></i>
-          </a>
-          <ul class="treeview-menu">
-            <li>
-              <a href="new_patient.php">
-                <i class="fa fa-plus"></i> Add New Patient
-              </a>
-            </li>
-            <li>
+          <li>
               <a href="patient.php">
-                <i class="fa fa-file-o"></i> All Patient
+                  <i class="fa fa-file-o text-aqua"></i> <span>All Patient</span>
               </a>
-            </li>  
-
-            <li>
+          </li>
+          <li>
               <a href="edit_patient.php">
-                <i class="fa fa-pencil"></i> Edit Patient
+                  <i class="fa fa-pencil text-aqua"></i> <span>Edit Patient</span>
               </a>
-            </li>          
-            
-            <!-- <li>
-              <a href="delete_patient.php">
-                <i class="fa fa-trash-o"></i> Delete Patient
+          </li>
+          <li>
+              <a href="new_patient.php">
+                  <i class="fa fa-plus text-aqua"></i> <span>Add New Patient</span>
               </a>
-            </li> -->
-          </ul>          
-        </li>        
+          </li>
 
-
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-comments text-aqua"></i>
-            <span>Doctor</span>
-            <i class="fa fa-angle-left pull-right"></i>
-          </a>
-          <ul class="treeview-menu">
-            <li>
-              <a href="add_doctor.php">
-                <i class="fa fa-plus"></i> Add New Doctor
-              </a>
-            </li>
-            <li>
-              <a href="edit_doctor.php">
-                <i class="fa fa-folder-o"></i> Edit Doctor
-              </a>
-            </li>
-            <!-- <li>
-              <a href="delete_doctor.php">
-                <i class="fa fa-trash-o"></i> Delete Doctor
-              </a>
-            </li>  --> 
-            <li>
+          <li class="header">DOCTORS</li>
+          <li>
               <a href="all_doctors.php">
-                <i class="fa fa-th"></i> All Doctors
+                  <i class="fa fa-th text-success"></i> <span>All Doctors</span>
               </a>
-            </li>          
-          </ul>          
+          </li>
+
+          <li>
+              <a href="edit_doctor.php">
+                  <i class="fa fa-folder-o text-success"></i> <span>Edit Doctor</span>
+              </a>
+          </li>
+
+          <li>
+              <a href="add_doctor.php">
+                  <i class="fa fa-plus text-success"></i> <span>Add New Doctor</span>
+              </a>
+          </li>
+
+          <li class="header">HEALTH RECORD</li>
+
+          <li>
+             <a href="new_record.php">
+               <i class="fa fa-edit text-blue"></i> <span>New Medical Record</span>
+             </a>
         </li>
+
+          <li class="header">SETTINGS</li>
 
 
         <li>
-         <a href="new_record.php">
-           <i class="fa fa-edit text-blue"></i> <span>New Medical Record</span></a>
-         </a> 
+            <a href="password.php"><i class="fa fa-circle text-blue"></i>
+                <span>Update Password</span>
+            </a>
         </li>
 
-
-
-
-        <li><a href="password.php"><i class="fa fa-circle text-blue"></i> <span>Update Password</span></a></li>
-        
-        
-
-        <li><a href="logout.php"><i class="fa fa-sign-out text-red"></i> <span>Logout</span></a></li>
+        <li>
+            <a href="logout.php"><i class="fa fa-sign-out text-red"></i>
+                <span>Logout</span>
+            </a>
+        </li>
       </ul>
     </section>
     <!-- /.sidebar -->

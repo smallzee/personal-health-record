@@ -38,7 +38,46 @@
           </div>
         </div>
         <div class="box-body">
-          &nbsp;
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            Total Doctor
+                        </div>
+                        <div class="panel-body">
+
+                            <h2 class="text-center">
+                                <?php
+                                    $sql = $db->query("SELECT * FROM admin");
+                                    echo $sql->rowCount();
+                                ?>
+                            </h2>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-sm-6">
+                    <div class="panel panel-warning">
+                        <div class="panel-heading">
+                            Total Patient
+                        </div>
+                        <div class="panel-body">
+
+                            <h2 class="text-center">
+                                <?php
+                                $sql = $db->query("SELECT * FROM patient");
+                                echo $sql->rowCount();
+                                ?>
+                            </h2>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
