@@ -2,7 +2,7 @@
   <div class="pull-right hidden-xs">
     <b>Admin.</b>
   </div>
-  <strong>Copyright &copy; 2018 Admin - All rights reserved.</strong>
+  <strong>Copyright &copy; 2021 Admin - All rights reserved.</strong>
  </footer>
 
   <!-- Add the sidebar's background. This div must be placed

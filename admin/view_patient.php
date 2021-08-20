@@ -54,96 +54,103 @@
         <div class="box-body">
           <h3><?php echo $page_title; ?></h3>
 
-          <h4>Name</h4>
-          <p>
-            <?php echo $rs['name']; ?>
-          </p>
+            <table class="table table-bordered">
+                <tr>
+                    <td>Name</td>
+                    <td><?php echo $rs['name']; ?></td>
+                </tr>
+                <tr>
+                    <td>Phone Number</td>
+                    <td><?php
+                        echo $rs['phone'];
+                        ?></td>
+                </tr>
+                <tr>
+                    <td>Email Address</td>
+                    <td><?php echo $rs['email']; ?></td>
+                </tr>
+                <tr>
+                    <td>Contact Address</td>
+                    <td><?php echo $rs['address']; ?></td>
+                </tr>
+                <tr>
+                    <td>Home Town</td>
+                    <td> <?php echo $rs['town']; ?></td>
+                </tr>
+                <tr>
+                    <td>Blood Group</td>
+                    <td> <?php echo $rs['blood_group']; ?></td>
+                </tr>
+                <tr>
+                    <td>Genotype</td>
+                    <td><?php echo $rs['genotype']; ?></td>
+                </tr>
+                <tr>
+                    <td>Date Of Birth</td>
+                    <td><?php echo $rs['dob']; ?></td>
+                </tr>
+                <tr>
+                    <td>Gender</td>
+                    <td><?php echo $rs['gender']; ?></td>
+                </tr>
+            </table>
 
-          <h4>Phone Number</h4>
-          <p>
-            <?php 
-              echo $rs['phone'];
-             ?>
-          </p>
-
-           <h4>Email Address</h4>
-           <p>
-             <?php echo $rs['email']; ?>
-           </p>
-
-           <h4>Contact Address</h4>
-           <p>
-             <?php echo $rs['address']; ?>
-           </p>
-
-           <h4>Home Town</h4>
-           <p>
-             <?php echo $rs['town']; ?>
-           </p>
-
-           <h4>Blood Group</h4>
-           <p>
-             <?php echo $rs['blood_group']; ?>
-           </p>
-
-           <h4>Genotype</h4>
-           <p>
-             <?php echo $rs['genotype']; ?>
-           </p>
-
-           <h4>DOB</h4>
-           <p>
-             <?php echo $rs['dob']; ?>
-           </p>
-
-           <h4>Gender</h4>
-           <p>
-             <?php echo $rs['gender']; ?>
-           </p>
-
-           <h4>Next of Kin Name</h4>
-           <p>
-             <?php echo $rs['kin_name']; ?>
-           </p>
-
-           <h4>Next of Kin Phone</h4>
-           <p>
-             <?php echo $rs['kin_phone']; ?>
-           </p>
-
-           <h4>Next of Kin Address</h4>
-           <p>
-             <?php echo $rs['kin_address']; ?>
-           </p>
-
+            <h5 class="page-header">Patient Next Of Kin</h5>
+            <table class="table table-bordered">
+                <tr>
+                    <td>Next of Kin Name</td>
+                    <td> <?php echo $rs['kin_name']; ?></td>
+                </tr>
+                <tr>
+                    <td>Next of Kin Phone</td>
+                    <td><?php echo $rs['kin_phone']; ?></td>
+                </tr>
+                <tr>
+                    <td>Next of Kin Address</td>
+                    <td><?php echo $rs['kin_address']; ?></td>
+                </tr>
+            </table>
 
            <h3>Medical Record</h3>
-           <?php
-            $patient_id = $rs['patient_id'];
 
-            $records = $db->query("SELECT * FROM medical_history WHERE patient_id = '$patient_id'");
-            if($records->rowCount() == 0){
-              echo "<p>User does not have a medical history!</p>";
-            }
+            <table class="table table-bordered" id="tables">
+                <thead>
+                <tr>
+                    <th>SN</th>
+                    <th>Doctor Treatment</th>
+                    <th>Doctor In-Charge</th>
+                    <th>Date</th>
+                </tr>
+                </thead>
+                <tfoot>
+                <tr>
+                    <th>SN</th>
+                    <th>Doctor Treatment</th>
+                    <th>Doctor In-Charge</th>
+                    <th>Date</th>
+                </tr>
+                </tfoot>
+                <tbody>
+                <?php
+                $sn =1;
+                $patient_id = $rs['patient_id'];
+                $records = $db->query("SELECT * FROM medical_history WHERE patient_id = '$patient_id'");
 
-            while($recs = $records->fetch(PDO::FETCH_ASSOC)){
-              ?>
-              <div class="panel panel-default">
-                <div class="panel-heading">Date - <?php echo date("F d y, h:i a",$recs['date_added']); ?></div>
-                <div class="panel-body">
-                  <h3>Doctor Comments</h3>
-                  <p>
-                    <?php echo nl2br($recs['comment']); ?>
-                  </p>
-                </div>
-                <div class="panel-footer">
-                  Doctor in Charge: <?php echo doctor($recs['doctor_id'],"name"); ?>
-                </div>
-              </div>
-              <br>
-              <?php
-            }
-           ?>
+                while ($recs = $records->fetch(PDO::FETCH_ASSOC)){
+                    ?>
+                    <tr>
+                        <td><?= $sn++ ?></td>
+                        <td><?php echo nl2br($recs['comment']); ?></td>
+                        <td><?php echo doctor($recs['doctor_id'],"name"); ?></td>
+                        <td><?php echo date("F d y, h:i a",$recs['date_added']); ?></td>
+                    </tr>
+                    <?php
+                }
+
+
+                ?>
+                </tbody>
+            </table>
 
         </div>
         <!-- /.box-body -->

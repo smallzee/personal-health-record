@@ -41,7 +41,7 @@
           <h3><?php echo $page_title; ?></h3>
 
           <h4>Search Record by Patient ID</h4>
-            <form action="view_patient.php" method="get" target="_blank">
+            <form  method="get" target="_blank">
               <div class="form-group">
                 <label>Patient ID</label>
                 <input type="text" name="id" class="form-control" required="" placeholder="Patient ID">

@@ -17,6 +17,6 @@
        folder instead of downloading all of them to reduce the load. -->
   	<link rel="stylesheet" href="css/skins/_all-skins.min.css">
   	</head>  	
-	<body class="hold-transition skin-red sidebar-mini">
+	<body class="hold-transition skin-blue sidebar-mini">
 	<!-- Site wrapper -->
 	<div class="wrapper">
