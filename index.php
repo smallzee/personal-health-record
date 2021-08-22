@@ -49,24 +49,20 @@
 	<div class="row left-index" style="margin-top: 150px;">
 		<!--<div class="">-->
 		<div class="col-md-7">			
-			<p align="center">
-				<img src="img/lth-logo.png" class="img-responsive">
-			</p>
+<!--			<p align="center">-->
+<!--				<img src="img/lth-logo.png" class="img-responsive">-->
+<!--			</p>-->
 			
 			<p align="center" style="color: #fff; font-size: 1.5em;">
 			    DESIGN AND IMPLEMENTATION OF PERSONAL HEALTH RECORD
 			</p>
 
 			<h4 align="center" style="color: #fff;">
-				Design By
-			</h4>
-
-			<h4 align="center" style="color: #fff;">
-
+				Design By : Odunuga Folake Deborah - HC20180203764
 			</h4>
 
 			<h3 class="page-header text-center" style="color: #fff;">
-				Supervised By
+				Supervised By : Alhaji Kawonise
 			</h3>
 		</div>
 

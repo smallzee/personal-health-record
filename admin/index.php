@@ -49,7 +49,7 @@
 
                             <h2 class="text-center">
                                 <?php
-                                    $sql = $db->query("SELECT * FROM admin");
+                                    $sql = $db->query("SELECT * FROM doctor WHERE hospital_id = 0");
                                     echo $sql->rowCount();
                                 ?>
                             </h2>

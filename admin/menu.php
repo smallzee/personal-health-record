@@ -118,6 +118,21 @@
              </a>
         </li>
 
+          <li class="header">HOSPITAL</li>
+
+          <li>
+              <a href="add_hospital.php">
+                  <i class="fa fa-plus text-blue"></i> <span>Hospital</span>
+              </a>
+          </li>
+
+          <li>
+              <a href="all_hospital.php">
+                  <i class="fa fa-plus text-blue"></i> <span>All Hospitals</span>
+              </a>
+          </li>
+
+
           <li class="header">SETTINGS</li>
 
 

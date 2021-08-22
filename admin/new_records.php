@@ -1,8 +1,8 @@
 <?php
   require_once 'core/db.php';
-  if(!admin())
+  if(!is_hospital())
   {
-    header("location:login.php");
+    header("location:../transferred.php");
     exit();
   }
 
@@ -23,14 +23,14 @@
 
 
     set_flash("Patient medical record added successfully","info");
-    header("location:new_records.php");
+    header("location:new_record.php");
     exit();
   }
 
   $page_title = "Add New Medical Record";
   $title = $page_title;
   include_once 'head.php';
-  include_once 'menu2.php';
+  include_once 'menu.php';
 ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -68,7 +68,8 @@
               <select class="form-control select2_single" name="patient_id" required="">
                 <option value="">Select Patient Id</option>
                 <?php
-                  $pat = $db->query("SELECT patient_id,name FROM patient");
+                $id = get_patient('id');
+                  $pat = $db->query("SELECT patient_id,name FROM patient WHERE id='$id'");
                   while($pat_rs = $pat->fetch(PDO::FETCH_ASSOC)){
                     ?>
                     <option value="<?php echo $pat_rs['patient_id']; ?>"><?php echo $pat_rs['name'] ?> - <?php echo $pat_rs['patient_id']; ?></option>
@@ -84,7 +85,8 @@
               <select class="form-control select2_single" name="doctor_id" required="">
                 <option value="">Select Doctor Name</option>
                 <?php
-                  $pat = $db->query("SELECT id,name FROM doctor WHERE hospital_id=0");
+                $hospital_id = get_patient('hospital_id');
+                  $pat = $db->query("SELECT id,name FROM doctor WHERE hospital_id='$hospital_id'");
                   while($pat_rs = $pat->fetch(PDO::FETCH_ASSOC)){
                     ?>
                     <option value="<?php echo $pat_rs['id']; ?>"><?php echo $pat_rs['name'] ?></option>

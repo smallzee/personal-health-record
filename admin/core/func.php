@@ -36,6 +36,14 @@ function admin()
     }
 }
 
+function is_hospital(){
+    if (isset($_SESSION['transferred'])){
+        return true;
+    }else{
+        return false;
+    }
+}
+
 function set_flash($msg,$type)
 {
     $_SESSION['flash'] = "<div class='alert alert-".$type."'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>".$msg."</div>";
@@ -233,6 +241,20 @@ function send_email($subject,$to,$message,$cc = FALSE)
     }
 
 
+    function get_hospital($id,$value){
+        global $db;
+        $sql = $db->query("SELECT * FROM hospital WHERE id='$id'");
+        $rs = $sql->fetch(PDO::FETCH_ASSOC);
+        return $rs[$value];
+    }
+
+function get_patient($value){
+    global $db;
+    $id = $_SESSION['transferred'];
+    $sql = $db->query("SELECT * FROM patient WHERE id='$id'");
+    $rs = $sql->fetch(PDO::FETCH_ASSOC);
+    return $rs[$value];
+}
 
 
 

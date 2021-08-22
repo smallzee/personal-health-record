@@ -1,13 +1,13 @@
 <?php
   require_once 'core/db.php';
-  if(!admin())
+  if(!is_hospital())
   {
     header("location:login.php");
     exit();
   }
 
   if(!isset($_GET['id'])){
-    header("location:patient.php");
+    header("location:patients.php");
     exit();
   }
   $id = $_GET['id'];
@@ -23,58 +23,11 @@
   $page_title = "Patient Record - ".$rs['name'];
   $title = $page_title;
 
-  if (isset($_POST['transfer'])){
-      $hospital_id = $_POST['hospital_id'];
-
-      $db->query("UPDATE patient SET hospital_id='$hospital_id' WHERE id='$id'");
-
-      set_flash("Patient has been transferred to ".get_hospital($hospital_id,'name'),'info');
-      header("location:view_patient.php?id=$id");
-      exit();
-  }
-
   include_once 'head.php';
-  include_once 'menu.php';
+  include_once 'menu2.php';
 ?>
 
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Transfer Patient</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-
-                    <form action="" method="post">
-                        <div class="form-group">
-                            <label for="">Hospital Name</label>
-                            <select name="hospital_id" id="" class="form-control" required>
-                                <option value="" disabled selected>Select</option>
-                                <?php
-                                    $sql = $db->query("SELECT * FROM hospital ORDER BY name");
-                                    while ($res = $sql->fetch(PDO::FETCH_ASSOC)){
-                                        ?>
-                                        <option value="<?= $res['id'] ?>"> <?= ucwords($res['name']) ?></option>
-                                        <?php
-                                    }
-                                ?>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <input type="submit" class="btn btn-primary" value="Transfer" name="transfer" id="">
-                        </div>
-                    </form>
-
-                </div>
-            </div>
-        </div>
-    </div>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -174,8 +127,6 @@
             </table>
 
            <h3>Medical Record</h3>
-
-            <a href="" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary" style="margin-bottom: 20px;">Transfer Patient</a>
 
             <table class="table table-bordered" id="tables">
                 <thead>

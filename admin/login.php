@@ -1,7 +1,6 @@
 <?php
 	require_once 'core/db.php';
-	
-	
+
 	if(isset($_SESSION['admin']))
 	{
 		header("location:index.php");
@@ -28,11 +27,11 @@
 			$id = $rs['id'];
 			$_SESSION['admin'] = $id;
 			$_SESSION['admin_name'] = "Admin";
-			$_SESSION['admin_role'] = 1;			
+			$_SESSION['admin_role'] = 1;
 			$sql->closeCursor();
 			header("location:index.php");
 			exit();
-		}		
+		}
 	}
 ?>
 <!DOCTYPE html>
@@ -40,16 +39,16 @@
 <head>
 	<title><?php echo $config['site_short_name'];?> Admin Login</title>
 	<meta charset="utf-8">
-	<meta http-equiv="x-ua-compatible" content="IE=Edge"/> 	
+	<meta http-equiv="x-ua-compatible" content="IE=Edge"/>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0" />
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" type="text/css" href="lib/font-awesome/font-awesome.min.css">	
+	<link rel="stylesheet" type="text/css" href="lib/font-awesome/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 	<link rel="stylesheet" href="css/custom.css">
 	<!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-  	<link rel="stylesheet" href="css/skins/_all-skins.min.css">  	
+  	<link rel="stylesheet" href="css/skins/_all-skins.min.css">
   	</head>
 	<body>
 		<!-- Site wrapper -->
@@ -75,12 +74,12 @@
 									<input type="password" name="password" required="" class="form-control" placeholder="Password">
 									<span class="input-group-addon"><i class="fa fa-key"></i></span>
 								</div>
-							</div>							
+							</div>
 
 							<div class="form-group">
 								<input type="submit" name="ok" class="btn btn-success" value="Login">
 							</div>
-						</form>						
+						</form>
 					</div>
 				</div>
 			</div>
@@ -90,5 +89,5 @@
 
 		<script type="text/javascript" src="lib/jquery/jquery.min.js"></script>
 		<script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
-	</body>	
+	</body>
 </html>
