@@ -2,31 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cfdf1f8a-986d-45ff-9766-afbafe71055e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/admin/add_doctors.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin/add_hospital.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin/all_doctor.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin/all_hospital.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin/dashboard.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin/edit_doctors.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin/edit_hospital.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin/edit_patients.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin/editing_doctor.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin/logouts.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin/menu2.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin/new_records.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin/patients.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin/view_patients.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/transferred.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/core/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/core/config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/core/func.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/core/func.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/login.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/menu.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/new_record.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/new_record.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/view_patient.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/view_patient.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/func.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/func.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/new_records.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/new_records.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,26 +25,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/menu.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="148" column="13" lean-forward="true" selection-start-line="144" selection-start-column="8" selection-end-line="148" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/admin/menu2.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="49" column="25" lean-forward="true" selection-start-line="30" selection-start-column="20" selection-end-line="49" selection-end-column="25" />
+            <state relative-caret-position="178">
+              <caret line="124" column="65" selection-start-line="124" selection-start-column="65" selection-end-line="124" selection-end-column="65" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/menu2.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-585">
+              <caret line="29" selection-start-line="29" selection-end-line="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/admin/new_records.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="684">
-              <caret line="88" column="95" selection-start-line="88" selection-start-column="95" selection-end-line="88" selection-end-column="95" />
+            <state relative-caret-position="300">
+              <caret line="19" column="28" lean-forward="true" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -82,15 +59,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/editing_doctor.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="369">
-              <caret line="56" column="37" selection-start-line="56" selection-start-column="37" selection-end-line="56" selection-end-column="37" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/dashboard.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="370">
@@ -100,26 +68,21 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/index.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="142">
-              <caret line="51" column="81" selection-start-line="51" selection-start-column="81" selection-end-line="51" selection-end-column="81" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/patients.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="109">
-              <caret line="11" column="21" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/logouts.php">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="8" column="16" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/logout.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="7" column="2" lean-forward="true" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="2" />
+            </state>
+          </provider>
         </entry>
       </file>
     </leaf>
@@ -136,7 +99,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/admin/logout.php" />
         <option value="$PROJECT_DIR$/core/all.php" />
         <option value="$PROJECT_DIR$/admin/core/db.php" />
         <option value="$PROJECT_DIR$/admin/search.php" />
@@ -147,7 +109,6 @@
         <option value="$PROJECT_DIR$/admin/core/config.php" />
         <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/admin/add_hospital.php" />
-        <option value="$PROJECT_DIR$/admin/menu.php" />
         <option value="$PROJECT_DIR$/all_hospital.php" />
         <option value="$PROJECT_DIR$/admin/all_hospital.php" />
         <option value="$PROJECT_DIR$/admin/edit_hospital.php" />
@@ -162,12 +123,15 @@
         <option value="$PROJECT_DIR$/admin/add_doctors.php" />
         <option value="$PROJECT_DIR$/admin/edit_doctors.php" />
         <option value="$PROJECT_DIR$/admin/editing_doctor.php" />
-        <option value="$PROJECT_DIR$/admin/new_records.php" />
         <option value="$PROJECT_DIR$/admin/new_record.php" />
         <option value="$PROJECT_DIR$/admin/dashboard.php" />
         <option value="$PROJECT_DIR$/admin/index.php" />
         <option value="$PROJECT_DIR$/admin/patients.php" />
         <option value="$PROJECT_DIR$/admin/menu2.php" />
+        <option value="$PROJECT_DIR$/admin/logouts.php" />
+        <option value="$PROJECT_DIR$/admin/logout.php" />
+        <option value="$PROJECT_DIR$/admin/menu.php" />
+        <option value="$PROJECT_DIR$/admin/new_records.php" />
       </list>
     </option>
   </component>
@@ -190,16 +154,6 @@
             <path>
               <item name="medical-records" type="b2602c69:ProjectViewProjectNode" />
               <item name="medical-records" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="medical-records" type="b2602c69:ProjectViewProjectNode" />
-              <item name="medical-records" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="medical-records" type="b2602c69:ProjectViewProjectNode" />
-              <item name="medical-records" type="462c0819:PsiDirectoryNode" />
-              <item name="core" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -253,16 +207,15 @@
       <workItem from="1629443936230" duration="2453000" />
       <workItem from="1629459169147" duration="556000" />
       <workItem from="1629565958364" duration="3619000" />
-      <workItem from="1629621731674" duration="4946000" />
+      <workItem from="1629621731674" duration="5911000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13935000" />
+    <option name="totallyTimeSpent" value="14900000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="777" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.33198708" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -344,13 +297,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/logout.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="26" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin/add_doctor.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="227">
@@ -406,13 +352,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="250">
           <caret line="63" column="44" selection-end-line="92" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/transferred.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="22" column="30" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="30" />
         </state>
       </provider>
     </entry>
@@ -500,24 +439,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/new_records.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="684">
-          <caret line="88" column="95" selection-start-line="88" selection-start-column="95" selection-end-line="88" selection-end-column="95" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin/new_record.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="39">
           <caret line="32" column="19" lean-forward="true" selection-start-line="32" selection-start-column="19" selection-end-line="32" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/dashboard.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="73" column="104" selection-start-line="73" selection-start-column="104" selection-end-line="73" selection-end-column="104" />
         </state>
       </provider>
     </entry>
@@ -528,13 +453,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="51" column="81" selection-start-line="51" selection-start-column="81" selection-end-line="51" selection-end-column="81" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin/patients.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="109">
@@ -542,20 +460,59 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/logouts.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/menu.php">
+    <entry file="file://$PROJECT_DIR$/admin/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="148" column="13" lean-forward="true" selection-start-line="144" selection-start-column="8" selection-end-line="148" selection-end-column="13" />
+        <state relative-caret-position="142">
+          <caret line="51" column="81" selection-start-line="51" selection-start-column="81" selection-end-line="51" selection-end-column="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/dashboard.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="370">
+          <caret line="73" column="104" selection-start-line="73" selection-start-column="104" selection-end-line="73" selection-end-column="104" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/transferred.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="23" column="35" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/logouts.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="8" column="16" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/logout.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="2" lean-forward="true" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="2" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/menu2.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="49" column="25" lean-forward="true" selection-start-line="30" selection-start-column="20" selection-end-line="49" selection-end-column="25" />
+        <state relative-caret-position="-585">
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/menu.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="124" column="65" selection-start-line="124" selection-start-column="65" selection-end-line="124" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/new_records.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="19" column="28" lean-forward="true" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="28" />
         </state>
       </provider>
     </entry>

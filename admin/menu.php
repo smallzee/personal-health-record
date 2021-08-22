@@ -122,7 +122,7 @@
 
           <li>
               <a href="add_hospital.php">
-                  <i class="fa fa-plus text-blue"></i> <span>Hospital</span>
+                  <i class="fa fa-plus text-blue"></i> <span>Add Hospital</span>
               </a>
           </li>
 
