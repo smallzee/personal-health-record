@@ -23,14 +23,14 @@
 
 
     set_flash("Patient medical record added successfully","info");
-    header("location:new_records.php");
+    header("location:new_record.php");
     exit();
   }
 
   $page_title = "Add New Medical Record";
   $title = $page_title;
   include_once 'head.php';
-  include_once 'menu2.php';
+  include_once 'menu.php';
 ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
