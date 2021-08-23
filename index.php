@@ -95,6 +95,13 @@
 							</div>
 						</form>
 					</div>
+
+                <center>
+                    <div class="btn-group">
+                        <a href="transferred.php" class="btn btn-primary">Transferred Patient</a>
+                        <a href="patient.php" class="btn btn-primary">Patient Record</a>
+                    </div>
+                </center>
 			</div>			
 		</div>		
 	</div>
