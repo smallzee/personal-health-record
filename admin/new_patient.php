@@ -21,35 +21,62 @@
     $kin_address = $_POST['kin_address'];
     $date_added = time();
 
-    $in = $db->prepare("INSERT INTO patient(name, phone, email, address, town, blood_group, genotype, dob, gender, kin_name, kin_phone, kin_address, date_added) VALUES(:name,:phone,:email,:address,:town,:blood_group,:genotype,:dob,:gender,:kin_name,:kin_phone,:kin_address,:date_added)");
+    if (isset($_FILES['image'])){
+        $file = $_FILES['image'];
+        $file_name = $file['name'];
 
-    $in->execute(array(
-      'name' => $name,
-      'phone' => $phone,
-      'email' => $email,
-      'address' => $address,
-      'town' => $town,
-      'blood_group' => $blood_group,
-      'genotype' => $genotype,
-      'dob' => $dob,
-      'gender' => $gender,
-      'kin_name' => $kin_name,
-      'kin_phone' => $kin_phone,
-      'kin_address' => $kin_address,
-      'date_added' => time()
-    ));
+        $size = $file['size'];
 
-    $in_id = $db->lastInsertId();
-    $in->closeCursor();
+        if ($size > 1048576){
+            set_flash("Maximum image size should br 1MB","danger");
+            header("location:new_patient.php");
+        }
 
-    $patient_id = "LTH-".$in_id;
+        $path = pathinfo($file_name,PATHINFO_EXTENSION);
+        if (!in_array($path,array('jpg','png','jpeg'))){
+            set_flash("Image file extension should be jpg,png,jpeg ","danger");
+            header("location:new_patient.php");
+        }
+    }
 
-    $up = $db->query("UPDATE patient SET patient_id = '$patient_id' WHERE id = '$in_id'");
-    $up->closeCursor();
+    $image = time().$file_name;
+    $folder = "../img/";
 
-    set_flash("Patient record added successfully","info");
-    header("location:new_patient.php");
-    exit();
+    $im = $folder.$image;
+
+    if (move_uploaded_file($file['tmp_name'],$im)) {
+
+        $in = $db->prepare("INSERT INTO patient(name, phone, email, address, town, blood_group, genotype, dob, gender, kin_name, kin_phone, kin_address, date_added,image) VALUES(:name,:phone,:email,:address,:town,:blood_group,:genotype,:dob,:gender,:kin_name,:kin_phone,:kin_address,:date_added,:image)");
+
+        $in->execute(array(
+            'name' => $name,
+            'phone' => $phone,
+            'email' => $email,
+            'address' => $address,
+            'town' => $town,
+            'blood_group' => $blood_group,
+            'genotype' => $genotype,
+            'dob' => $dob,
+            'gender' => $gender,
+            'kin_name' => $kin_name,
+            'kin_phone' => $kin_phone,
+            'kin_address' => $kin_address,
+            'date_added' => time(),
+            'image'=>$image
+        ));
+
+        $in_id = $db->lastInsertId();
+        $in->closeCursor();
+
+        $patient_id = "LTH-" . $in_id;
+
+        $up = $db->query("UPDATE patient SET patient_id = '$patient_id' WHERE id = '$in_id'");
+        $up->closeCursor();
+
+        set_flash("Patient record added successfully", "info");
+        //header("location:new_patient.php");
+        //exit();
+    }
   }
 
   $page_title = "Add New Patient";
@@ -86,7 +113,7 @@
         <div class="box-body">
           <h3><?php echo $page_title; ?></h3>
 
-          <form action="" method="post">
+          <form action="" method="post" enctype="multipart/form-data">
             <?php flash(); ?>
             <div class="form-group">
               <label>Patient Name</label>
@@ -174,6 +201,11 @@
               <textarea name="kin_address" required="" class="form-control" required="" placeholder="Next of Kin Contact Address"></textarea>
             </div>
 
+
+              <div class="form-group">
+                  <label for="">Image</label>
+                  <input type="file" name="image" accept="image/*" id="">
+              </div>
 
 
             <div class="form-group">

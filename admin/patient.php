@@ -44,6 +44,7 @@
             <thead>
               <tr>
                 <th>Sn</th>
+                <th>Image</th>
                 <th>Patient No</th>
                 <th>Name</th>
                 <th>Phone</th>
@@ -64,6 +65,7 @@
                     <td>
                       <?php echo ++$n; ?>
                     </td>
+                      <td><img src="../img/<?= $rs['image'] ?>" style="width: 50px; height: 50px; border-radius: 10px;" alt=""></td>
                     <td>
                       <?php echo $rs['patient_id']; ?>
                     </td>
